@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<h3>Welcome to Products Page</h3>
+{% for i in products %}
+    <h3>Название: {{ i.product_title }}</h3>
+    <h3>Price: {{ i.product_price }}$</h3>
+    <h3>Description: {{ i.product_description }}</h3>
+    <h3>Amount: {{ i.product_amount }}</h3>
+    <h3>Category: {{ i.product_category }}</h3>
+    <h3>Created_at: {{ i.product_created_at }}</h3>
+{% endfor %}
+</body>
+</html>
