@@ -30,3 +30,21 @@ class MyLoginView(LoginView):
 def logout_view(request):
     logout(request)
     return redirect('home_page')
+
+
+def single_product(request, pk):
+    product = ProductModel.objects.get(pk=pk) #2
+    context = {'product': product}
+    return render(request, template_name='single-product.html', context=context)
+
+def search_products(request):
+    if request.method == 'POST':
+        get_product = request.POST.get('search_product')
+
+        try:
+            exact_product = ProductModel.objects.get(product_title__icontains=get_product)
+        
+            return redirect(f'product/{exact_product.id}')
+        except:
+            return redirect('/')
+    
