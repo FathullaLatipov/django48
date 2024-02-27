@@ -47,4 +47,11 @@ def search_products(request):
             return redirect(f'product/{exact_product.id}')
         except:
             return redirect('/')
+
+def add_products_to_user_cart(request, pk):
+    if request.method == 'POST':
+        checker = ProductModel.objects.get(pk=pk) #2
+
+        if checker.product_amount >= int(request.POST.get('pr_count')):
+            pass
     

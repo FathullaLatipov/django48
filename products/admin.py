@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from products.models import CategoryModel, ProductModel
+from products.models import CategoryModel, ProductModel, CartModel
 
 
 @admin.register(CategoryModel)
@@ -17,3 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ['pk']
     search_fields = ['product_title']
     list_filter = ['product_created_at']
+
+@admin.register(CartModel)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['user_id', 'user_add_date']
