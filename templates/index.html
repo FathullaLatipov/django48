@@ -3,7 +3,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - In Bloom: Fruity Ecommerce</title>
+  <title>Django shop</title>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/gh-pages/css/shop-homepage.css'>
   <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -133,6 +133,11 @@
                   <h5 class="card-title">{{ product.product_title }}</h5>
                   <p class="card-text">{{ product.product_description }}</p>
                   <a href="/product/{{ product.pk }}" class="btn btn-primary">See More</a>
+                  <form action="add_to_cart/{{product.pk}}" method="post" style="margin-left:60%; margin-top: -19%">
+                      {% csrf_token %}
+                      <input type="number" min="1" value="1" name="pr_count" width="120px">
+                      <button class="btn btn-primary"><i class="fa fa-shopping-basket"></i></button>
+                  </form>
                 </div>
               </div>
         </div>
