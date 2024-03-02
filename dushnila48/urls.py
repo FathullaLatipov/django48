@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from products.views import home_page, products_page, MyLoginView, \
-    logout_view, single_product, search_products, add_products_to_user_cart, user_cart
+    logout_view, single_product, search_products, add_products_to_user_cart, user_cart, delete_user_cart
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,7 +16,8 @@ urlpatterns = [
     path('product/<int:pk>', single_product, name='single-product'),    
     path('search', search_products, name='search-product'),
     path('add_to_cart/<int:pk>', add_products_to_user_cart, name='add_to_cart'),
-    path('user_cart', user_cart, name='user_cart')
+    path('user_cart', user_cart, name='user_cart'),
+    path('delete_product/<int:pk>', delete_user_cart, name='delete_product')
 
 ]
 

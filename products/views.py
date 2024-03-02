@@ -67,16 +67,24 @@ def add_products_to_user_cart(request, pk):
 def user_cart(request):
     cart = CartModel.objects.filter(user_id=request.user.id)  # 4
     if request.method == 'POST':
-        main_text = 'Новый заказ'
+        main_text = 'Новый заказ\n'
 
         for i in cart:
-            main_text += f'Товар: {i.user_product}\n' \
-                         f'Кол-во: {i.user_product_quantity}\n' \
-                         f'Пользователь: {i.user_id}\n' \
-                         f'Цена: {i.user_product.product_price}\n'
+            main_text += f'Товар 🛒: {i.user_product}\n' \
+                         f'Кол-во 🌐: {i.user_product_quantity}\n' \
+                         f'Пользователь 👤: {i.user_id}\n' \
+                         f'Цена 💸: {i.user_product.product_price}\n'
             bot.send_message(-1001995816426, main_text)
             cart.delete()
             return redirect('/')
     else:
         context = {'cart': cart}
         return render(request, template_name='cart.html', context=context)
+
+
+def delete_user_cart(request, pk):
+    product_delete = ProductModel.objects.get(pk=pk)  # 8
+
+    CartModel.objects.filter(user_id=request.user.id, user_product=product_delete).delete()
+
+    return redirect('/user_cart')

@@ -123,18 +123,24 @@
                 <div class="product-name">Название: {{ j.user_product.product_title}}</div>
                 <div class="product-price">
                     Кол-во: {{ j.user_product_quantity }}
-                    <div class="product-price">Цена: {{ j.user_product.product_price }}</div>
+<!--                    <div class="product-price">Цена: {{ j.user_product.product_price }}</div>-->
                 </div>
             </div>
             <div class="col-md-3 cart-actions">
-                <div class="product-price-total">49 SEK</div>
+                <div class="product-price-total">Цена: {{ j.user_product.product_price }} $</div>
                 <div class="product-delete">
-                    <button type="button" data-toggle="tooltip" title="Ta bort" class="delete"
-                            onclick="cart.remove('5');"><i class="fas fa-times-circle"></i></button>
+                   <form action="/delete_product/{{ j.user_product.pk }}" method="post">
+                      {% csrf_token %}
+                      <button class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                  </form>
                 </div>
             </div>
         </div><!-- cart-row-->
         {% endfor %}
+        <form method="post" style="text-align: center;margin-bottom: 15px">
+            {% csrf_token %}
+            <button class="btn btn-primary">Оформить заказ!</button>
+        </form>
         <div class="row cart-special-holder">
             <div class="col-md-12">
                 <div class="cart-special">
